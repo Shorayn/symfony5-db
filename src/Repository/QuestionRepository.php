@@ -26,9 +26,7 @@ class QuestionRepository extends ServiceEntityRepository
     
     public function findAllAskedOrderedByNewest()
     {
-        $qb =  $this->createQueryBuilder('q');
-        
-        return $this->addIsAskedQueryBuilder($qb)
+        return $this->addIsAskedQueryBuilder()
             ->orderBy('q.askedAt', 'DESC')
             ->getQuery()
             ->getResult()

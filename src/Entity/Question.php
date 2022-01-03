@@ -113,4 +113,18 @@ class Question
 
         return $this;
     }
+
+    public function upVote(): self
+    {
+        $this->Votes++;
+
+        return $this;
+    }
+
+    public function downVote(): self
+    {
+        $this->Votes--;
+
+        return $this;
+    }
 }
