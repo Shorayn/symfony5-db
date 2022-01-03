@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Question;
+use App\Repository\QuestionRepository;
 use App\Service\MarkdownHelper;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,9 +27,13 @@ class QuestionController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage()
+    public function homepage(QuestionRepository $repository)
     {
-        return $this->render('question/homepage.html.twig');
+        $questions = $repository->findAllAskedOrderedByNewest();
+
+        return $this->render('question/homepage.html.twig', [
+            'questions' => $questions
+        ]);
     }
 
     /**
