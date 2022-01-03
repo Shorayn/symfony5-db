@@ -37,6 +37,11 @@ class Question
      */
     private $askedAt;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Votes = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,25 @@ class Question
     public function setAskedAt(?\DateTimeInterface $askedAt): self
     {
         $this->askedAt = $askedAt;
+
+        return $this;
+    }
+
+    public function getVotes(): int
+    {
+        return $this->Votes;
+    }
+
+    public function getVotesString(): string {
+        
+        $prefix = $this->getVotes() >= 0 ? '+' : '-';
+
+        return sprintf('%s %d',  $prefix, abs($this->getVotes()));
+    }
+
+    public function setVotes(int $Votes): self
+    {
+        $this->Votes = $Votes;
 
         return $this;
     }
